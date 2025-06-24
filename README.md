@@ -1,3 +1,11 @@
+# Demo
+
+
+
+https://github.com/user-attachments/assets/907c3f6f-807c-4805-879a-649c74804c29
+
+
+
 # Elastic MCP
 
 Connect to your Elasticsearch cluster from any MCP-compatible client (such as Claude Desktop) using the Model Context Protocol (MCP).
