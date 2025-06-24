@@ -1,8 +1,8 @@
 # Elastic MCP
 
 Connect to your Elasticsearch cluster from any MCP-compatible client (such as Claude Desktop) using the Model Context Protocol (MCP).
-
 This server exposes your Elasticsearch data and operations via the MCP interface, enabling agents and applications to query, manage, and analyze your data through natural language interactions.
+
 ---
 
 ## 1. Setup
@@ -22,8 +22,10 @@ uv pip install -r requirements.txt
 
 ## 2. Running the MCP Server
 
+Test using MCP Inspector
+
 ```sh
-fastmcp dev tools/elastic_tool.py ELASTIC_URL="http://localhost:9200" ELASTIC_USERNAME="your_username" ELASTIC_PASSWORD="your_password"
+ELASTIC_URL="http://localhost:9200" ELASTIC_USERNAME="your_username" ELASTIC_PASSWORD="your_password" fastmcp dev tools/elastic_tool.py
 ```
 or Add to the Claude Desktop
 ```sh
@@ -33,7 +35,7 @@ or edit the config.json and add the following code snippet
 
 {
   "mcpServers": {
-    "Elastic MCP Server \ud83d\ude80": {
+    "Elastic MCP Server": {
       "command": "uv",
       "args": [
         "run",
@@ -61,21 +63,15 @@ or edit the config.json and add the following code snippet
 - **list_indices**: List all indices (excluding system indices).
 - **get_index_mappings**: Get mappings for a specific index.
 
-## 4. Development
-
-- Add new tools to `tools/elastic_tool.py` using the `@mcp.tool()` decorator.
-- Use environment variables for configuration.
-- See `.gitignore` for ignored files.
-
 ---
 
-## 5. License
+## 4. License
 
 MIT License
 
 ---
 
-## 6. Notes
+## 5. Notes
 
 - For production, do **not** hardcode credentials.
 - For more info on MCP, see [FastMCP documentation](https://github.com/ai-llm/fastmcp).
