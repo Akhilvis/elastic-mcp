@@ -1,7 +1,11 @@
 import os
 import logging
 from fastmcp import FastMCP
-from elasticsearch import Elasticsearch
+from elasticsearch import Elasticsearch, exceptions as es_exceptions
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("elastic-mcp")
 
 # Create an MCP server
 mcp = FastMCP("Elastic MCP Server")
@@ -24,21 +28,33 @@ es = Elasticsearch(
 @mcp.tool()
 def search_index(index: str, query: str) -> dict:
     """Search an Elasticsearch index with a simple query string."""
-    resp = es.search(index=index, query={"query_string": {"query": query}})
-    return resp
+    try:
+        resp = es.search(index=index, query={"query_string": {"query": query}})
+        return resp
+    except es_exceptions.ElasticsearchException as e:
+        logger.error(f"Error searching index '{index}': {e}")
+        return {"error": str(e)}
 
 @mcp.tool()
 def list_indices() -> list:
     """List all indices in the Elasticsearch cluster."""
-    indices = es.indices.get_alias()
-    filtered = [name for name in indices.keys() if not name.startswith('.')]
-    return filtered
+    try:
+        indices = es.indices.get_alias()
+        filtered = [name for name in indices.keys() if not name.startswith('.')]
+        return filtered
+    except es_exceptions.ElasticsearchException as e:
+        logger.error(f"Error listing indices: {e}")
+        return []
 
 @mcp.tool()
 def get_index_mappings(index: str) -> dict:
     """Get the mappings of a specific Elasticsearch index."""
-    mappings = es.indices.get_mapping(index=index)
-    return mappings.get(index, {})
+    try:
+        mappings = es.indices.get_mapping(index=index)
+        return mappings.get(index, {})
+    except es_exceptions.ElasticsearchException as e:
+        logger.error(f"Error getting mappings for index '{index}': {e}")
+        return {"error": str(e)}
 
 
 if __name__ == "__main__":
