@@ -1,7 +1,8 @@
 # Elastic MCP
 
-A Minimal Command Protocol (MCP) server with tools for interacting with Elasticsearch, including searching, listing indices, retrieving mappings, and bulk data upload.
+Connect to your Elasticsearch cluster from any MCP-compatible client (such as Claude Desktop) using the Model Context Protocol (MCP).
 
+This server exposes your Elasticsearch data and operations via the MCP interface, enabling agents and applications to query, manage, and analyze your data through natural language interactions.
 ---
 
 ## 1. Setup
@@ -14,28 +15,9 @@ A Minimal Command Protocol (MCP) server with tools for interacting with Elastics
 
 ### Install dependencies
 
-Using `uv` (recommended):
+Using `uv` package manager:
 ```sh
 uv pip install -r requirements.txt
-```
-Or, if you use `pyproject.toml`:
-```sh
-uv venv
-uv pip install -r requirements.txt
-```
-
-Or with pip:
-```sh
-pip install -r requirements.txt
-```
-
-### Set environment variables
-
-Set your Elasticsearch connection details:
-```sh
-export ELASTIC_URL="http://localhost:9200"
-export ELASTIC_USERNAME="your_username"
-export ELASTIC_PASSWORD="your_password"
 ```
 
 ## 2. Running the MCP Server
@@ -47,7 +29,28 @@ or Add to the Claude Desktop
 ```sh
 fastmcp install tools/elastic_tool.py
 
-or edit the config.json
+or edit the config.json and add the following code snippet
+
+{
+  "mcpServers": {
+    "Elastic MCP Server \ud83d\ude80": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--with-requirements",
+        "/Users/akhilviswam/Documents/LLM/mcp/elastic-mcp/requirements.txt",
+        "fastmcp",
+        "run",
+        "/Users/akhilviswam/Documents/LLM/mcp/elastic-mcp/tools/elastic_tool.py"
+      ],
+      "env": {
+        "ELASTIC_URL": "http://localhost:9200",
+        "ELASTIC_USERNAME": "your_username",
+        "ELASTIC_PASSWORD": "your_password"
+      }
+    }
+  }
+}
 
 
 ```
