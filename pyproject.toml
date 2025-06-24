@@ -1,0 +1,12 @@
+[project]
+name = "elastic-mcp"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "elasticsearch>=9.0.2",
+    "fastmcp>=2.8.1",
+    "kagglehub>=0.3.12",
+    "pandas>=2.3.0",
+]
