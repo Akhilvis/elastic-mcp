@@ -49,7 +49,7 @@ or Add to the Claude Desktop by editing the claude_desktop_config.json and add t
         "<absolute path to requirements.txt>",
         "fastmcp",
         "run",
-        "<absolute path to relastic_tool.py>"
+        "<absolute path to elastic_tool.py>"
       ],
       "env": {
         "ELASTIC_URL": "http://localhost:9200",
