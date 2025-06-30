@@ -8,5 +8,9 @@ dependencies = [
     "elasticsearch>=9.0.2",
     "fastmcp>=2.8.1",
     "kagglehub>=0.3.12",
+    "langchain-community>=0.3.26",
+    "langchain-mcp-adapters>=0.1.7",
+    "langchain-ollama>=0.3.3",
+    "langgraph>=0.4.10",
     "pandas>=2.3.0",
 ]
