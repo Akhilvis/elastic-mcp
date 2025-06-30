@@ -31,7 +31,7 @@ def search_index(index: str, query: str) -> dict:
     try:
         resp = es.search(index=index, query={"query_string": {"query": query}})
         return resp
-    except es_exceptions.ElasticsearchException as e:
+    except Exception as e:
         logger.error(f"Error searching index '{index}': {e}")
         return {"error": str(e)}
 
@@ -42,7 +42,7 @@ def list_indices() -> list:
         indices = es.indices.get_alias()
         filtered = [name for name in indices.keys() if not name.startswith('.')]
         return filtered
-    except es_exceptions.ElasticsearchException as e:
+    except Exception as e:
         logger.error(f"Error listing indices: {e}")
         return []
 
@@ -52,12 +52,10 @@ def get_index_mappings(index: str) -> dict:
     try:
         mappings = es.indices.get_mapping(index=index)
         return mappings.get(index, {})
-    except es_exceptions.ElasticsearchException as e:
+    except Exception as e:
         logger.error(f"Error getting mappings for index '{index}': {e}")
         return {"error": str(e)}
 
 
-if __name__ == "__main__":
-    mcp.run()
-
-
+if __name__=="__main__":
+    mcp.run(transport="streamable-http")
