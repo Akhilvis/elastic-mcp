@@ -35,7 +35,19 @@ Test using MCP Inspector
 ```sh
 ELASTIC_URL="http://localhost:9200" ELASTIC_USERNAME="your_username" ELASTIC_PASSWORD="your_password" fastmcp dev tools/elastic_tool.py
 ```
-or Add to the Claude Desktop by editing the claude_desktop_config.json and add the following code snippet
+or 
+
+Run the mcp server by 
+
+ELASTIC_URL="http://localhost:9200" ELASTIC_USERNAME="elastic" ELASTIC_PASSWORD="hKsXqDsd" python3 tools/elastic_tool.py
+
+and run mcp client in another terminal by
+
+python3 mcp_client.py
+
+or 
+
+Add to the Claude Desktop by editing the claude_desktop_config.json and add the following code snippet
 
 ```sh
 
