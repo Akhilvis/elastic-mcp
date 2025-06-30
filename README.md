@@ -38,13 +38,14 @@ ELASTIC_URL="http://localhost:9200" ELASTIC_USERNAME="your_username" ELASTIC_PAS
 or 
 
 Run the mcp server by 
-
+```sh
 ELASTIC_URL="http://localhost:9200" ELASTIC_USERNAME="elastic" ELASTIC_PASSWORD="hKsXqDsd" python3 tools/elastic_tool.py
-
+```
 and run mcp client in another terminal by
 
+```sh
 python3 mcp_client.py
-
+```
 or 
 
 Add to the Claude Desktop by editing the claude_desktop_config.json and add the following code snippet
